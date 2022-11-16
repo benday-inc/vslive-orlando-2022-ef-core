@@ -85,7 +85,7 @@ import { UserClaimSearchComponent } from './_components/user-claim/user-claim-se
     BrowserAnimationsModule,
     RouterModule.forRoot(
       [
-        { path: '', component: Person, pathMatch: 'full' },
+        { path: '', component: PersonListComponent, pathMatch: 'full' },
         {
           path: 'configuration-item/configuration-item-list',
           component: ConfigurationItemListComponent,

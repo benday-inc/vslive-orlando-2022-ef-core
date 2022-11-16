@@ -21,7 +21,8 @@
                 "name": "edge for angular"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",                
+                "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
