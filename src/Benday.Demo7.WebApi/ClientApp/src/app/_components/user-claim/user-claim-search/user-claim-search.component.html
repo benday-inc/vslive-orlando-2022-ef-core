@@ -1,0 +1,302 @@
+<h3>user claim</h3>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div *ngIf="parentId === -1">
+  <a routerLink="/user-claim/user-claim-details/0">Create New</a>
+</div>
+<div *ngIf="parentId !== -1">
+  <a
+    routerLink="/user-claim/user-claim-details/0"
+    [queryParams]="{ parentId: parentId }"
+    >Create New</a
+  >
+</div>
+
+<div class="form-group">
+  <form (ngSubmit)="search(searchForm)" #searchForm="ngForm">
+    <div class="form-group">
+      <label
+        >search
+        <input
+          type="text"
+          class="form-control"
+          placeholder="search"
+          required
+          name="searchValue"
+          #recipeName="ngModel"
+          [(ngModel)]="searchValue"
+      /></label>
+      <button type="submit" class="btn btn-primary mx-2">Search</button>
+      <button
+        class="btn btn-secondary mx-2"
+        *ngIf="searchValue"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'Username'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Username')"
+            class="btn btn-link text-decoration-none"
+          >
+            username
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Username' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Username')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> username &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Username' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Username')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>username &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'ClaimName'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimName')"
+            class="btn btn-link text-decoration-none"
+          >
+            claim name
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ClaimName' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> claim name &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ClaimName' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>claim name &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'ClaimValue'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            claim value
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ClaimValue' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> claim value &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ClaimValue' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>claim value &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'ClaimLogicType'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimLogicType')"
+            class="btn btn-link text-decoration-none"
+          >
+            claim type (normal / date)
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ClaimLogicType' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimLogicType')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> claim type (normal / date) &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ClaimLogicType' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ClaimLogicType')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>claim type (normal / date) &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'StartDate'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('StartDate')"
+            class="btn btn-link text-decoration-none"
+          >
+            claim start date
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'StartDate' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('StartDate')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> claim start date &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'StartDate' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('StartDate')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>claim start date &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'EndDate'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('EndDate')"
+            class="btn btn-link text-decoration-none"
+          >
+            claim end date
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'EndDate' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('EndDate')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> claim end date &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'EndDate' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('EndDate')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>claim end date &uarr;</b>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of items.currentPageValues"
+        routerLink="/user-claim/user-claim-details/{{ item.id }}"
+      >
+        <td>{{ item.username }}</td>
+        <td>{{ item.claimName }}</td>
+        <td>{{ item.claimValue }}</td>
+        <td>{{ item.claimLogicType }}</td>
+        <td>{{ item.startDate }}</td>
+        <td>{{ item.endDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row justify-content-between">
+  <div>Row Count: {{ items.totalCount }}</div>
+  <div>
+    <ng-container
+      *ngFor="let in of getLoopArray(items.pageCount); let i = index"
+    >
+      <button
+        *ngIf="i + 1 === items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-secondary"
+      >
+        {{ i + 1 }}
+      </button>
+      <button
+        *ngIf="i + 1 !== items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-light"
+      >
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+  </div>
+</div>

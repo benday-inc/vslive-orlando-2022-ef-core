@@ -1,0 +1,187 @@
+<h3>Person</h3>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div>
+  <a routerLink="/person/person-details/0">Create New</a>
+</div>
+
+<div class="form-group">
+  <form (ngSubmit)="search(searchForm)" #searchForm="ngForm">
+    <div class="form-group">
+      <label
+        >search
+        <input
+          type="text"
+          class="form-control"
+          placeholder="search"
+          required
+          name="searchValue"
+          #recipeName="ngModel"
+          [(ngModel)]="searchValue"
+      /></label>
+      <button type="submit" class="btn btn-primary mx-2">Search</button>
+      <button
+        class="btn btn-secondary mx-2"
+        *ngIf="searchValue"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'FirstName'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FirstName')"
+            class="btn btn-link text-decoration-none"
+          >
+            First name
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FirstName' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FirstName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> First name &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FirstName' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FirstName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>First name &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'LastName'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LastName')"
+            class="btn btn-link text-decoration-none"
+          >
+            Last name
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LastName' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LastName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> Last name &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LastName' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LastName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>Last name &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'EmailAddress'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('EmailAddress')"
+            class="btn btn-link text-decoration-none"
+          >
+            Email address
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'EmailAddress' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('EmailAddress')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> Email address &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'EmailAddress' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('EmailAddress')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>Email address &uarr;</b>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of items.currentPageValues"
+        routerLink="/person/person-details/{{ item.id }}"
+      >
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.emailAddress }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row justify-content-between">
+  <div>Row Count: {{ items.totalCount }}</div>
+  <div>
+    <ng-container
+      *ngFor="let in of getLoopArray(items.pageCount); let i = index"
+    >
+      <button
+        *ngIf="i + 1 === items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-secondary"
+      >
+        {{ i + 1 }}
+      </button>
+      <button
+        *ngIf="i + 1 !== items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-light"
+      >
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+  </div>
+</div>

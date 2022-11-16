@@ -1,0 +1,42 @@
+<h3>user claim</h3>
+<ng-container *ngIf="!hideCreate">
+  <div *ngIf="parentId === -1">
+    <a routerLink="/user-claim/user-claim-details/0">Create New</a>
+  </div>
+  <div *ngIf="parentId !== -1">
+    <a
+      routerLink="/user-claim/user-claim-details/0"
+      [queryParams]="{ parentId: parentId }"
+      >Create New</a
+    >
+  </div>
+</ng-container>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>username</th>
+        <th>claim name</th>
+        <th>claim value</th>
+        <th>claim type (normal / date)</th>
+        <th>claim start date</th>
+        <th>claim end date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items" (click)="rowClicked($event, item)">
+        <td>{{ item.username }}</td>
+        <td>{{ item.claimName }}</td>
+        <td>{{ item.claimValue }}</td>
+        <td>{{ item.claimLogicType }}</td>
+        <td>{{ item.startDate }}</td>
+        <td>{{ item.endDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

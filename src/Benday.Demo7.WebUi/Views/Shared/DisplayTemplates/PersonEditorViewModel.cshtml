@@ -1,0 +1,26 @@
+@model Benday.Demo7.WebUi.Models.PersonEditorViewModel
+    <tr id="@Html.Id("row")">
+    @Html.HiddenFor(model => model.IsMarkedForDelete)
+    @Html.HiddenFor(model => model.IsSelected)
+        <td>
+        @Html.DisplayFor(model => model.FirstName)
+        </td>
+        <td>
+        @Html.DisplayFor(model => model.LastName)
+        </td>
+        <td>
+        @Html.DisplayFor(model => model.EmailAddress)
+        </td>
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Status)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.LastModifiedBy)
+    @Html.HiddenFor(model => model.LastModifiedDate)
+    @Html.HiddenFor(model => model.Timestamp)
+        <td>
+        @Html.ActionLink("Edit", "Edit", "Person", new { id=Model.Id }) |
+        @Html.ActionLink("Details", "Details", "Person", new { id=Model.Id }) |
+        @Html.ActionLink("Delete", "Delete", "Person", new { id=Model.Id })
+        </td>
+    </tr>

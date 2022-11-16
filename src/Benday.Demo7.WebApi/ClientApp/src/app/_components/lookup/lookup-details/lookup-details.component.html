@@ -1,0 +1,196 @@
+<div class="form-horizontal">
+  <h2>lookup ({{ theModel.id }})</h2>
+
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group">
+    <form (ngSubmit)="save()" [formGroup]="theForm">
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLookupDisplayOrder"
+          >Display Order</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Display Order"
+          [id]="fieldNameLookupDisplayOrder"
+          formControlName="{{ fieldNameLookupDisplayOrder }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="Lookup Type"
+        lookupTypeName="System.Lookup.Types"
+        #lookupLookupType
+        formControlName="lookupLookupType"
+        [isRequired]="true"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            lookupKey !== null &&
+            lookupKey.invalid &&
+            (lookupKey.dirty || lookupKey.touched)
+          "
+        >
+          <div
+            *ngIf="lookupKey.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Lookup Key is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="lookupKey.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Lookup Key value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLookupLookupKey"
+          >Lookup Key</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="Lookup Key"
+          [id]="fieldNameLookupLookupKey"
+          formControlName="{{ fieldNameLookupLookupKey }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            lookupValue !== null &&
+            lookupValue.invalid &&
+            (lookupValue.dirty || lookupValue.touched)
+          "
+        >
+          <div
+            *ngIf="lookupValue.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Lookup Value is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="lookupValue.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Lookup Value value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLookupLookupValue"
+          >Lookup Value</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="Lookup Value"
+          [id]="fieldNameLookupLookupValue"
+          formControlName="{{ fieldNameLookupLookupValue }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLookupId">Id</label>
+        {{ theModel.id }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNameLookupId"
+          formControlName="{{ fieldNameLookupId }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="Status"
+        lookupTypeName="System.Lookup.StatusValues"
+        #lookupStatus
+        formControlName="lookupStatus"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLookupCreatedBy"
+          >Created By</label
+        >
+        {{ theModel.createdBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameLookupCreatedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLookupCreatedDate"
+          >Created Date</label
+        >
+        {{ theModel.createdDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameLookupCreatedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLookupLastModifiedBy"
+          >Last Modified By</label
+        >
+        {{ theModel.lastModifiedBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameLookupLastModifiedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLookupLastModifiedDate"
+          >Last Modified Date</label
+        >
+        {{ theModel.lastModifiedDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameLookupLastModifiedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLookupTimestamp"
+          >Timestamp</label
+        >
+        {{ theModel.timestamp }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameLookupTimestamp }}"
+        />
+      </div>
+
+      <div class="btn-toolbar">
+        <button
+          type="submit"
+          class="btn btn-primary mx-2"
+          [disabled]="!theForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger mx-2" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

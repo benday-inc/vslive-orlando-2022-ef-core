@@ -1,0 +1,23 @@
+<ng-container [formGroup]="theForm">
+  <div class="mb-3">
+    <label class="form-label" [for]="'selectControl' + lookupTypeName">{{
+      labelText
+    }}</label>
+    <div *ngIf="message" class="alert alert-primary" role="alert">
+      {{ message }}
+    </div>
+    <select
+      class="form-select"
+      formControlName="control"
+      [id]="'selectControl' + lookupTypeName"
+    >
+      <option value="" disabled selected>(select an option)</option>
+      <option
+        *ngFor="let option of availableValues"
+        [value]="option.lookupKey | lowercase"
+      >
+        {{ option.lookupValue }}
+      </option>
+    </select>
+  </div>
+</ng-container>

@@ -1,0 +1,10 @@
+input.ng-invalid {
+  background-color: red;
+}
+
+button:disabled,
+button[disabled] {
+  border: 20px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

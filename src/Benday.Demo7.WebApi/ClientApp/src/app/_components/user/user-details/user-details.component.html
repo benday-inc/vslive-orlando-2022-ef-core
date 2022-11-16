@@ -1,0 +1,326 @@
+<div class="form-horizontal">
+  <h2>user ({{ theModel.id }})</h2>
+
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group">
+    <form (ngSubmit)="save()" [formGroup]="theForm">
+      <div class="mb-3">
+        <div
+          *ngIf="
+            username !== null &&
+            username.invalid &&
+            (username.dirty || username.touched)
+          "
+        >
+          <div
+            *ngIf="username.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            username is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="username.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            username value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserUsername">username</label>
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="username"
+          [id]="fieldNameUserUsername"
+          formControlName="{{ fieldNameUserUsername }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            source !== null &&
+            source.invalid &&
+            (source.dirty || source.touched)
+          "
+        >
+          <div
+            *ngIf="source.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Source is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="source.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Source value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserSource">Source</label>
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="Source"
+          [id]="fieldNameUserSource"
+          formControlName="{{ fieldNameUserSource }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            emailAddress !== null &&
+            emailAddress.invalid &&
+            (emailAddress.dirty || emailAddress.touched)
+          "
+        >
+          <div
+            *ngIf="emailAddress.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            email address is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="emailAddress.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            email address value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserEmailAddress"
+          >email address</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="email address"
+          [id]="fieldNameUserEmailAddress"
+          formControlName="{{ fieldNameUserEmailAddress }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            firstName !== null &&
+            firstName.invalid &&
+            (firstName.dirty || firstName.touched)
+          "
+        >
+          <div
+            *ngIf="firstName.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            first name is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="firstName.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            first name value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserFirstName"
+          >first name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="first name"
+          [id]="fieldNameUserFirstName"
+          formControlName="{{ fieldNameUserFirstName }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            lastName !== null &&
+            lastName.invalid &&
+            (lastName.dirty || lastName.touched)
+          "
+        >
+          <div
+            *ngIf="lastName.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            last name is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="lastName.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            last name value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserLastName"
+          >last name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="last name"
+          [id]="fieldNameUserLastName"
+          formControlName="{{ fieldNameUserLastName }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            phoneNumber !== null &&
+            phoneNumber.invalid &&
+            (phoneNumber.dirty || phoneNumber.touched)
+          "
+        >
+          <div
+            *ngIf="phoneNumber.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            phone number is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="phoneNumber.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            phone number value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserPhoneNumber"
+          >phone number</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="phone number"
+          [id]="fieldNameUserPhoneNumber"
+          formControlName="{{ fieldNameUserPhoneNumber }}"
+        />
+      </div>
+
+      <app-user-claim-list
+        labelText="claims"
+        [items]="theModel.claims"
+        [autoLoad]="false"
+        [parentId]="theModel.id"
+      ></app-user-claim-list>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserId">Id</label>
+        {{ theModel.id }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNameUserId"
+          formControlName="{{ fieldNameUserId }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="Status"
+        lookupTypeName="System.Lookup.StatusValues"
+        #userStatus
+        formControlName="userStatus"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserCreatedBy"
+          >Created By</label
+        >
+        {{ theModel.createdBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserCreatedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserCreatedDate"
+          >Created Date</label
+        >
+        {{ theModel.createdDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserCreatedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserLastModifiedBy"
+          >Last Modified By</label
+        >
+        {{ theModel.lastModifiedBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserLastModifiedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserLastModifiedDate"
+          >Last Modified Date</label
+        >
+        {{ theModel.lastModifiedDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserLastModifiedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserTimestamp"
+          >Timestamp</label
+        >
+        {{ theModel.timestamp }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserTimestamp }}"
+        />
+      </div>
+
+      <div class="btn-toolbar">
+        <button
+          type="submit"
+          class="btn btn-primary mx-2"
+          [disabled]="!theForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger mx-2" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

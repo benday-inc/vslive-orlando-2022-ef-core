@@ -1,0 +1,293 @@
+<div class="form-horizontal">
+  <h2>user claim ({{ theModel.id }})</h2>
+
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group">
+    <form (ngSubmit)="save()" [formGroup]="theForm">
+      <div class="mb-3">
+        <div
+          *ngIf="
+            username !== null &&
+            username.invalid &&
+            (username.dirty || username.touched)
+          "
+        >
+          <div
+            *ngIf="username.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            username is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="username.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            username value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserClaimUsername"
+          >username</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="username"
+          [id]="fieldNameUserClaimUsername"
+          formControlName="{{ fieldNameUserClaimUsername }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            claimName !== null &&
+            claimName.invalid &&
+            (claimName.dirty || claimName.touched)
+          "
+        >
+          <div
+            *ngIf="claimName.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            claim name is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="claimName.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            claim name value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserClaimClaimName"
+          >claim name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="claim name"
+          [id]="fieldNameUserClaimClaimName"
+          formControlName="{{ fieldNameUserClaimClaimName }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            claimValue !== null &&
+            claimValue.invalid &&
+            (claimValue.dirty || claimValue.touched)
+          "
+        >
+          <div
+            *ngIf="claimValue.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            claim value is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="claimValue.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            claim value value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserClaimClaimValue"
+          >claim value</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="claim value"
+          [id]="fieldNameUserClaimClaimValue"
+          formControlName="{{ fieldNameUserClaimClaimValue }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserClaimUserId"
+          >UserId</label
+        >
+        {{ theModel.userId }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNameUserClaimUserId"
+          formControlName="{{ fieldNameUserClaimUserId }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="claim type (normal / date)"
+        lookupTypeName="System.UserClaim.ClaimLogicTypes"
+        #userClaimClaimLogicType
+        formControlName="userClaimClaimLogicType"
+        [isRequired]="true"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            startDate !== null &&
+            startDate.invalid &&
+            (startDate.dirty || startDate.touched)
+          "
+        >
+          <div
+            *ngIf="startDate.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            claim start date value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserClaimStartDate"
+          >claim start date</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="claim start date"
+          [id]="fieldNameUserClaimStartDate"
+          formControlName="{{ fieldNameUserClaimStartDate }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            endDate !== null &&
+            endDate.invalid &&
+            (endDate.dirty || endDate.touched)
+          "
+        >
+          <div
+            *ngIf="endDate.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            claim end date value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameUserClaimEndDate"
+          >claim end date</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="claim end date"
+          [id]="fieldNameUserClaimEndDate"
+          formControlName="{{ fieldNameUserClaimEndDate }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserClaimId">Id</label>
+        {{ theModel.id }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNameUserClaimId"
+          formControlName="{{ fieldNameUserClaimId }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="Status"
+        lookupTypeName="System.Lookup.StatusValues"
+        #userClaimStatus
+        formControlName="userClaimStatus"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserClaimCreatedBy"
+          >Created By</label
+        >
+        {{ theModel.createdBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserClaimCreatedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserClaimCreatedDate"
+          >Created Date</label
+        >
+        {{ theModel.createdDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserClaimCreatedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserClaimLastModifiedBy"
+          >Last Modified By</label
+        >
+        {{ theModel.lastModifiedBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserClaimLastModifiedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserClaimLastModifiedDate"
+          >Last Modified Date</label
+        >
+        {{ theModel.lastModifiedDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserClaimLastModifiedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameUserClaimTimestamp"
+          >Timestamp</label
+        >
+        {{ theModel.timestamp }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameUserClaimTimestamp }}"
+        />
+      </div>
+
+      <div class="btn-toolbar">
+        <button
+          type="submit"
+          class="btn btn-primary mx-2"
+          [disabled]="!theForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger mx-2" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

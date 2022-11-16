@@ -1,0 +1,227 @@
+<h3>configuration item</h3>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div>
+  <a routerLink="/configuration-item/configuration-item-details/0"
+    >Create New</a
+  >
+</div>
+
+<div class="form-group">
+  <form (ngSubmit)="search(searchForm)" #searchForm="ngForm">
+    <div class="form-group">
+      <label
+        >search
+        <input
+          type="text"
+          class="form-control"
+          placeholder="search"
+          required
+          name="searchValue"
+          #recipeName="ngModel"
+          [(ngModel)]="searchValue"
+      /></label>
+      <button type="submit" class="btn btn-primary mx-2">Search</button>
+      <button
+        class="btn btn-secondary mx-2"
+        *ngIf="searchValue"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'Category'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Category')"
+            class="btn btn-link text-decoration-none"
+          >
+            category
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Category' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Category')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> category &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Category' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Category')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>category &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'ConfigurationKey'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ConfigurationKey')"
+            class="btn btn-link text-decoration-none"
+          >
+            configuration key
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ConfigurationKey' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ConfigurationKey')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> configuration key &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ConfigurationKey' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ConfigurationKey')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>configuration key &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'Description'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Description')"
+            class="btn btn-link text-decoration-none"
+          >
+            description
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Description' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Description')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> description &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Description' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Description')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>description &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'ConfigurationValue'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ConfigurationValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            configuration value
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ConfigurationValue' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ConfigurationValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> configuration value &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'ConfigurationValue' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('ConfigurationValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>configuration value &uarr;</b>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of items.currentPageValues"
+        routerLink="/configuration-item/configuration-item-details/{{
+          item.id
+        }}"
+      >
+        <td>{{ item.category }}</td>
+        <td>{{ item.configurationKey }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.configurationValue }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row justify-content-between">
+  <div>Row Count: {{ items.totalCount }}</div>
+  <div>
+    <ng-container
+      *ngFor="let in of getLoopArray(items.pageCount); let i = index"
+    >
+      <button
+        *ngIf="i + 1 === items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-secondary"
+      >
+        {{ i + 1 }}
+      </button>
+      <button
+        *ngIf="i + 1 !== items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-light"
+      >
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+  </div>
+</div>

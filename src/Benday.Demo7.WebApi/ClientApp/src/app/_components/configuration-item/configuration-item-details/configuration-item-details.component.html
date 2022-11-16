@@ -1,0 +1,252 @@
+<div class="form-horizontal">
+  <h2>configuration item ({{ theModel.id }})</h2>
+
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group">
+    <form (ngSubmit)="save()" [formGroup]="theForm">
+      <div class="mb-3">
+        <div
+          *ngIf="
+            category !== null &&
+            category.invalid &&
+            (category.dirty || category.touched)
+          "
+        >
+          <div
+            *ngIf="category.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            category is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="category.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            category value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameConfigurationItemCategory"
+          >category</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="category"
+          [id]="fieldNameConfigurationItemCategory"
+          formControlName="{{ fieldNameConfigurationItemCategory }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            configurationKey !== null &&
+            configurationKey.invalid &&
+            (configurationKey.dirty || configurationKey.touched)
+          "
+        >
+          <div
+            *ngIf="configurationKey.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            configuration key is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="configurationKey.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            configuration key value is required
+          </div>
+        </div>
+        <label
+          class="form-label"
+          [for]="fieldNameConfigurationItemConfigurationKey"
+          >configuration key</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="configuration key"
+          [id]="fieldNameConfigurationItemConfigurationKey"
+          formControlName="{{ fieldNameConfigurationItemConfigurationKey }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            description !== null &&
+            description.invalid &&
+            (description.dirty || description.touched)
+          "
+        >
+          <div
+            *ngIf="description.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            description is too long. Max length is 512
+          </div>
+          <div
+            *ngIf="description.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            description value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameConfigurationItemDescription"
+          >description</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="512"
+          required
+          placeholder="description"
+          [id]="fieldNameConfigurationItemDescription"
+          formControlName="{{ fieldNameConfigurationItemDescription }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            configurationValue !== null &&
+            configurationValue.invalid &&
+            (configurationValue.dirty || configurationValue.touched)
+          "
+        >
+          <div
+            *ngIf="configurationValue.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            configuration value value is required
+          </div>
+        </div>
+        <label
+          class="form-label"
+          [for]="fieldNameConfigurationItemConfigurationValue"
+          >configuration value</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="configuration value"
+          [id]="fieldNameConfigurationItemConfigurationValue"
+          formControlName="{{ fieldNameConfigurationItemConfigurationValue }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameConfigurationItemId"
+          >Id</label
+        >
+        {{ theModel.id }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNameConfigurationItemId"
+          formControlName="{{ fieldNameConfigurationItemId }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="Status"
+        lookupTypeName="System.Lookup.StatusValues"
+        #configurationItemStatus
+        formControlName="configurationItemStatus"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameConfigurationItemCreatedBy"
+          >Created By</label
+        >
+        {{ theModel.createdBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameConfigurationItemCreatedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameConfigurationItemCreatedDate"
+          >Created Date</label
+        >
+        {{ theModel.createdDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameConfigurationItemCreatedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label
+          class="form-label"
+          [for]="fieldNameConfigurationItemLastModifiedBy"
+          >Last Modified By</label
+        >
+        {{ theModel.lastModifiedBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameConfigurationItemLastModifiedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label
+          class="form-label"
+          [for]="fieldNameConfigurationItemLastModifiedDate"
+          >Last Modified Date</label
+        >
+        {{ theModel.lastModifiedDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameConfigurationItemLastModifiedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameConfigurationItemTimestamp"
+          >Timestamp</label
+        >
+        {{ theModel.timestamp }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameConfigurationItemTimestamp }}"
+        />
+      </div>
+
+      <div class="btn-toolbar">
+        <button
+          type="submit"
+          class="btn btn-primary mx-2"
+          [disabled]="!theForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger mx-2" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

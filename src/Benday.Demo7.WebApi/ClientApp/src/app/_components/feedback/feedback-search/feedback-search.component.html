@@ -1,0 +1,367 @@
+<h3>feedback</h3>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div>
+  <a routerLink="/feedback/feedback-details/0">Create New</a>
+</div>
+
+<div class="form-group">
+  <form (ngSubmit)="search(searchForm)" #searchForm="ngForm">
+    <div class="form-group">
+      <label
+        >search
+        <input
+          type="text"
+          class="form-control"
+          placeholder="search"
+          required
+          name="searchValue"
+          #recipeName="ngModel"
+          [(ngModel)]="searchValue"
+      /></label>
+      <button type="submit" class="btn btn-primary mx-2">Search</button>
+      <button
+        class="btn btn-secondary mx-2"
+        *ngIf="searchValue"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'FeedbackType'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FeedbackType')"
+            class="btn btn-link text-decoration-none"
+          >
+            feedback type
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FeedbackType' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FeedbackType')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> feedback type &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FeedbackType' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FeedbackType')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>feedback type &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'Sentiment'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Sentiment')"
+            class="btn btn-link text-decoration-none"
+          >
+            sentiment
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Sentiment' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Sentiment')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> sentiment &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Sentiment' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Sentiment')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>sentiment &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'Subject'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Subject')"
+            class="btn btn-link text-decoration-none"
+          >
+            notification subject
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Subject' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Subject')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> notification subject &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Subject' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Subject')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>notification subject &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'FeedbackText'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FeedbackText')"
+            class="btn btn-link text-decoration-none"
+          >
+            message
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FeedbackText' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FeedbackText')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> message &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FeedbackText' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FeedbackText')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>message &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'Username'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Username')"
+            class="btn btn-link text-decoration-none"
+          >
+            username
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Username' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Username')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> username &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'Username' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('Username')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>username &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'FirstName'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FirstName')"
+            class="btn btn-link text-decoration-none"
+          >
+            first name
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FirstName' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FirstName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> first name &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'FirstName' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('FirstName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>first name &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'LastName'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LastName')"
+            class="btn btn-link text-decoration-none"
+          >
+            last name
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LastName' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LastName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> last name &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LastName' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LastName')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>last name &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'IsContactRequest'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('IsContactRequest')"
+            class="btn btn-link text-decoration-none"
+          >
+            yes, I'd like a reply
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'IsContactRequest' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('IsContactRequest')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> yes, I'd like a reply &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'IsContactRequest' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('IsContactRequest')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>yes, I'd like a reply &uarr;</b>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of items.currentPageValues"
+        routerLink="/feedback/feedback-details/{{ item.id }}"
+      >
+        <td>{{ item.feedbackType }}</td>
+        <td>{{ item.sentiment }}</td>
+        <td>{{ item.subject }}</td>
+        <td>{{ item.feedbackText }}</td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.isContactRequest }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row justify-content-between">
+  <div>Row Count: {{ items.totalCount }}</div>
+  <div>
+    <ng-container
+      *ngFor="let in of getLoopArray(items.pageCount); let i = index"
+    >
+      <button
+        *ngIf="i + 1 === items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-secondary"
+      >
+        {{ i + 1 }}
+      </button>
+      <button
+        *ngIf="i + 1 !== items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-light"
+      >
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+  </div>
+</div>

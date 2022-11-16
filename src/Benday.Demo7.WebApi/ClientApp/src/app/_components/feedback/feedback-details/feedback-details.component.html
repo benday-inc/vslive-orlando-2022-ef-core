@@ -1,0 +1,348 @@
+<div class="form-horizontal">
+  <h2>feedback ({{ theModel.id }})</h2>
+
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group">
+    <form (ngSubmit)="save()" [formGroup]="theForm">
+      <app-lookup-dropdown-control
+        labelText="feedback type"
+        lookupTypeName="System.Feedback.FeedbackType"
+        #feedbackFeedbackType
+        formControlName="feedbackFeedbackType"
+        [isRequired]="true"
+      ></app-lookup-dropdown-control>
+
+      <app-lookup-dropdown-control
+        labelText="sentiment"
+        lookupTypeName="System.Feedback.SentimentType"
+        #feedbackSentiment
+        formControlName="feedbackSentiment"
+        [isRequired]="true"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            subject !== null &&
+            subject.invalid &&
+            (subject.dirty || subject.touched)
+          "
+        >
+          <div
+            *ngIf="subject.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            notification subject is too long. Max length is 1024
+          </div>
+          <div
+            *ngIf="subject.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            notification subject value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameFeedbackSubject"
+          >notification subject</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="1024"
+          required
+          placeholder="notification subject"
+          [id]="fieldNameFeedbackSubject"
+          formControlName="{{ fieldNameFeedbackSubject }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            feedbackText !== null &&
+            feedbackText.invalid &&
+            (feedbackText.dirty || feedbackText.touched)
+          "
+        >
+          <div
+            *ngIf="feedbackText.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            message is too long. Max length is 2048
+          </div>
+          <div
+            *ngIf="feedbackText.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            message value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameFeedbackFeedbackText"
+          >message</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="2048"
+          required
+          placeholder="message"
+          [id]="fieldNameFeedbackFeedbackText"
+          formControlName="{{ fieldNameFeedbackFeedbackText }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            username !== null &&
+            username.invalid &&
+            (username.dirty || username.touched)
+          "
+        >
+          <div
+            *ngIf="username.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            username is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="username.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            username value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameFeedbackUsername"
+          >username</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="username"
+          [id]="fieldNameFeedbackUsername"
+          formControlName="{{ fieldNameFeedbackUsername }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            firstName !== null &&
+            firstName.invalid &&
+            (firstName.dirty || firstName.touched)
+          "
+        >
+          <div
+            *ngIf="firstName.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            first name is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="firstName.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            first name value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameFeedbackFirstName"
+          >first name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="first name"
+          [id]="fieldNameFeedbackFirstName"
+          formControlName="{{ fieldNameFeedbackFirstName }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            lastName !== null &&
+            lastName.invalid &&
+            (lastName.dirty || lastName.touched)
+          "
+        >
+          <div
+            *ngIf="lastName.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            last name is too long. Max length is 50
+          </div>
+          <div
+            *ngIf="lastName.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            last name value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameFeedbackLastName"
+          >last name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="50"
+          required
+          placeholder="last name"
+          [id]="fieldNameFeedbackLastName"
+          formControlName="{{ fieldNameFeedbackLastName }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackReferer"
+          >referer</label
+        >
+        {{ theModel.referer }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackReferer }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackUserAgent"
+          >user agent</label
+        >
+        {{ theModel.userAgent }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackUserAgent }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackIpAddress"
+          >ip address</label
+        >
+        {{ theModel.ipAddress }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackIpAddress }}"
+        />
+      </div>
+      <div class="form-group form-check form-check-inline">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          placeholder="yes, I'd like a reply"
+          formControlName="{{ fieldNameFeedbackIsContactRequest }}"
+          [id]="fieldNameFeedbackIsContactRequest"
+        />
+        <label class="form-check-label" for="fieldNameFeedbackIsContactRequest"
+          >yes, I'd like a reply</label
+        >
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackId">Id</label>
+        {{ theModel.id }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNameFeedbackId"
+          formControlName="{{ fieldNameFeedbackId }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="Status"
+        lookupTypeName="System.Lookup.StatusValues"
+        #feedbackStatus
+        formControlName="feedbackStatus"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackCreatedBy"
+          >Created By</label
+        >
+        {{ theModel.createdBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackCreatedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackCreatedDate"
+          >Created Date</label
+        >
+        {{ theModel.createdDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackCreatedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackLastModifiedBy"
+          >Last Modified By</label
+        >
+        {{ theModel.lastModifiedBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackLastModifiedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackLastModifiedDate"
+          >Last Modified Date</label
+        >
+        {{ theModel.lastModifiedDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackLastModifiedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameFeedbackTimestamp"
+          >Timestamp</label
+        >
+        {{ theModel.timestamp }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNameFeedbackTimestamp }}"
+        />
+      </div>
+
+      <div class="btn-toolbar">
+        <button
+          type="submit"
+          class="btn btn-primary mx-2"
+          [disabled]="!theForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger mx-2" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

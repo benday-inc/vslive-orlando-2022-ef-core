@@ -1,0 +1,39 @@
+<h3>log entries</h3>
+<ng-container *ngIf="!hideCreate">
+  <div>
+    <a routerLink="/log-entry/log-entry-details/0">Create New</a>
+  </div>
+</ng-container>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>category</th>
+        <th>log level</th>
+        <th>log text</th>
+        <th>exception text</th>
+        <th>event id</th>
+        <th>state</th>
+        <th>log date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items" (click)="rowClicked($event, item)">
+        <td>{{ item.id }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.logLevel }}</td>
+        <td>{{ item.logText }}</td>
+        <td>{{ item.exceptionText }}</td>
+        <td>{{ item.eventId }}</td>
+        <td>{{ item.state }}</td>
+        <td>{{ item.logDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

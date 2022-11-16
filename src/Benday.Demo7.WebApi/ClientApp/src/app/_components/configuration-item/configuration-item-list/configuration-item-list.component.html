@@ -1,0 +1,33 @@
+<h3>configuration item</h3>
+<ng-container *ngIf="!hideCreate">
+  <div>
+    <a routerLink="/configuration-item/configuration-item-details/0"
+      >Create New</a
+    >
+  </div>
+</ng-container>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>category</th>
+        <th>configuration key</th>
+        <th>description</th>
+        <th>configuration value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items" (click)="rowClicked($event, item)">
+        <td>{{ item.category }}</td>
+        <td>{{ item.configurationKey }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.configurationValue }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

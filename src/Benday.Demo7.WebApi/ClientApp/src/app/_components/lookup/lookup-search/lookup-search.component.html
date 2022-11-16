@@ -1,0 +1,223 @@
+<h3>lookup</h3>
+
+<div *ngIf="message" class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+
+<div>
+  <a routerLink="/lookup/lookup-details/0">Create New</a>
+</div>
+
+<div class="form-group">
+  <form (ngSubmit)="search(searchForm)" #searchForm="ngForm">
+    <div class="form-group">
+      <label
+        >search
+        <input
+          type="text"
+          class="form-control"
+          placeholder="search"
+          required
+          name="searchValue"
+          #recipeName="ngModel"
+          [(ngModel)]="searchValue"
+      /></label>
+      <button type="submit" class="btn btn-primary mx-2">Search</button>
+      <button
+        class="btn btn-secondary mx-2"
+        *ngIf="searchValue"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="form-group table-reponsive">
+  <table class="table table-striped table-hover" id="search-results">
+    <thead>
+      <tr>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'DisplayOrder'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('DisplayOrder')"
+            class="btn btn-link text-decoration-none"
+          >
+            Display Order
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'DisplayOrder' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('DisplayOrder')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> Display Order &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'DisplayOrder' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('DisplayOrder')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>Display Order &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'LookupType'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupType')"
+            class="btn btn-link text-decoration-none"
+          >
+            Lookup Type
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LookupType' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupType')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> Lookup Type &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LookupType' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupType')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>Lookup Type &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'LookupKey'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupKey')"
+            class="btn btn-link text-decoration-none"
+          >
+            Lookup Key
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LookupKey' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupKey')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> Lookup Key &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LookupKey' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupKey')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>Lookup Key &uarr;</b>
+          </button>
+        </th>
+        <th>
+          <button
+            *ngIf="items.currentSortProperty !== 'LookupValue'"
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            Lookup Value
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LookupValue' &&
+              items.currentSortDirection === 'descending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b> Lookup Value &darr;</b>
+          </button>
+          <button
+            *ngIf="
+              items.currentSortProperty === 'LookupValue' &&
+              items.currentSortDirection === 'ascending'
+            "
+            type="button"
+            name="sortBy"
+            (click)="sortBy('LookupValue')"
+            class="btn btn-link text-decoration-none"
+          >
+            <b>Lookup Value &uarr;</b>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of items.currentPageValues"
+        routerLink="/lookup/lookup-details/{{ item.id }}"
+      >
+        <td>{{ item.displayOrder }}</td>
+        <td>{{ item.lookupType }}</td>
+        <td>{{ item.lookupKey }}</td>
+        <td>{{ item.lookupValue }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row justify-content-between">
+  <div>Row Count: {{ items.totalCount }}</div>
+  <div>
+    <ng-container
+      *ngFor="let in of getLoopArray(items.pageCount); let i = index"
+    >
+      <button
+        *ngIf="i + 1 === items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-secondary"
+      >
+        {{ i + 1 }}
+      </button>
+      <button
+        *ngIf="i + 1 !== items.currentPage"
+        type="button"
+        name="pageNumber"
+        (click)="changePage(i + 1)"
+        class="btn btn-light"
+      >
+        {{ i + 1 }}
+      </button>
+    </ng-container>
+  </div>
+</div>

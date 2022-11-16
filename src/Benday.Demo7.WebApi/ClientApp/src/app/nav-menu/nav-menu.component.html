@@ -1,0 +1,117 @@
+<header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+  >
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">Demo7</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded"
+        (click)="toggle()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+        [ngClass]="{ show: isExpanded }"
+      >
+        <ul class="navbar-nav flex-grow">
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="dropdown nav-item">
+            <a
+              data-target="navbarDropdownMenu"
+              class="nav-link dropdown-toggle"
+              (click)="toggle()"
+              data-toggle="dropdown"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >generated components <span class="caret"></span
+            ></a>
+            <ul
+              class="dropdown-menu"
+              id="navbarDropdownMenu"
+              [ngClass]="{ show: isExpanded }"
+            >
+              <li class="nav-item" [routerLinkActive]="'link-active'">
+                <a
+                  class="nav-link text-dark"
+                  (click)="collapse()"
+                  [routerLink]="[
+                    '/configuration-item/configuration-item-search'
+                  ]"
+                >
+                  configuration item
+                </a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="'link-active'">
+                <a
+                  class="nav-link text-dark"
+                  (click)="collapse()"
+                  [routerLink]="['/feedback/feedback-search']"
+                >
+                  feedback
+                </a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="'link-active'">
+                <a
+                  class="nav-link text-dark"
+                  (click)="collapse()"
+                  [routerLink]="['/log-entry/log-entry-search']"
+                >
+                  log entries
+                </a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="'link-active'">
+                <a
+                  class="nav-link text-dark"
+                  (click)="collapse()"
+                  [routerLink]="['/lookup/lookup-search']"
+                >
+                  lookup
+                </a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="'link-active'">
+                <a
+                  class="nav-link text-dark"
+                  (click)="collapse()"
+                  [routerLink]="['/person/person-search']"
+                >
+                  Person
+                </a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="'link-active'">
+                <a
+                  class="nav-link text-dark"
+                  (click)="collapse()"
+                  [routerLink]="['/user/user-search']"
+                >
+                  user
+                </a>
+              </li>
+              <li class="nav-item" [routerLinkActive]="'link-active'">
+                <a
+                  class="nav-link text-dark"
+                  (click)="collapse()"
+                  [routerLink]="['/user-claim/user-claim-search']"
+                >
+                  user claim
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

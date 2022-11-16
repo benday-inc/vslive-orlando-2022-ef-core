@@ -1,0 +1,238 @@
+<div class="form-horizontal">
+  <h2>log entries ({{ theModel.id }})</h2>
+
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group">
+    <form (ngSubmit)="save()" [formGroup]="theForm">
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNameLogEntryId">Id</label>
+        {{ theModel.id }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNameLogEntryId"
+          formControlName="{{ fieldNameLogEntryId }}"
+        />
+      </div>
+      <div class="mb-3">
+        <div
+          *ngIf="
+            category !== null &&
+            category.invalid &&
+            (category.dirty || category.touched)
+          "
+        >
+          <div
+            *ngIf="category.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            category value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLogEntryCategory"
+          >category</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="category"
+          [id]="fieldNameLogEntryCategory"
+          formControlName="{{ fieldNameLogEntryCategory }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            logLevel !== null &&
+            logLevel.invalid &&
+            (logLevel.dirty || logLevel.touched)
+          "
+        >
+          <div
+            *ngIf="logLevel.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            log level value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLogEntryLogLevel"
+          >log level</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="log level"
+          [id]="fieldNameLogEntryLogLevel"
+          formControlName="{{ fieldNameLogEntryLogLevel }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            logText !== null &&
+            logText.invalid &&
+            (logText.dirty || logText.touched)
+          "
+        >
+          <div
+            *ngIf="logText.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            log text value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLogEntryLogText"
+          >log text</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="log text"
+          [id]="fieldNameLogEntryLogText"
+          formControlName="{{ fieldNameLogEntryLogText }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            exceptionText !== null &&
+            exceptionText.invalid &&
+            (exceptionText.dirty || exceptionText.touched)
+          "
+        >
+          <div
+            *ngIf="exceptionText.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            exception text value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLogEntryExceptionText"
+          >exception text</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="exception text"
+          [id]="fieldNameLogEntryExceptionText"
+          formControlName="{{ fieldNameLogEntryExceptionText }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            eventId !== null &&
+            eventId.invalid &&
+            (eventId.dirty || eventId.touched)
+          "
+        >
+          <div
+            *ngIf="eventId.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            event id value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLogEntryEventId"
+          >event id</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="event id"
+          [id]="fieldNameLogEntryEventId"
+          formControlName="{{ fieldNameLogEntryEventId }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            state !== null && state.invalid && (state.dirty || state.touched)
+          "
+        >
+          <div
+            *ngIf="state.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            state value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLogEntryState">state</label>
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="state"
+          [id]="fieldNameLogEntryState"
+          formControlName="{{ fieldNameLogEntryState }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            logDate !== null &&
+            logDate.invalid &&
+            (logDate.dirty || logDate.touched)
+          "
+        >
+          <div
+            *ngIf="logDate.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            log date value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNameLogEntryLogDate"
+          >log date</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          required
+          placeholder="log date"
+          [id]="fieldNameLogEntryLogDate"
+          formControlName="{{ fieldNameLogEntryLogDate }}"
+        />
+      </div>
+
+      <div class="btn-toolbar">
+        <button
+          type="submit"
+          class="btn btn-primary mx-2"
+          [disabled]="!theForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger mx-2" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

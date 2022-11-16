@@ -1,0 +1,213 @@
+<div class="form-horizontal">
+  <h2>Person ({{ theModel.id }})</h2>
+
+  <div *ngIf="message" class="alert alert-primary" role="alert">
+    {{ message }}
+  </div>
+
+  <div class="form-group">
+    <form (ngSubmit)="save()" [formGroup]="theForm">
+      <div class="mb-3">
+        <div
+          *ngIf="
+            firstName !== null &&
+            firstName.invalid &&
+            (firstName.dirty || firstName.touched)
+          "
+        >
+          <div
+            *ngIf="firstName.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            First name is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="firstName.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            First name value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNamePersonFirstName"
+          >First name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="First name"
+          [id]="fieldNamePersonFirstName"
+          formControlName="{{ fieldNamePersonFirstName }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            lastName !== null &&
+            lastName.invalid &&
+            (lastName.dirty || lastName.touched)
+          "
+        >
+          <div
+            *ngIf="lastName.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Last name is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="lastName.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Last name value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNamePersonLastName"
+          >Last name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="Last name"
+          [id]="fieldNamePersonLastName"
+          formControlName="{{ fieldNamePersonLastName }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <div
+          *ngIf="
+            emailAddress !== null &&
+            emailAddress.invalid &&
+            (emailAddress.dirty || emailAddress.touched)
+          "
+        >
+          <div
+            *ngIf="emailAddress.errors?.maxLength"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Email address is too long. Max length is 100
+          </div>
+          <div
+            *ngIf="emailAddress.errors?.required"
+            class="alert alert-warning"
+            role="alert"
+          >
+            Email address value is required
+          </div>
+        </div>
+        <label class="form-label" [for]="fieldNamePersonEmailAddress"
+          >Email address</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          maxlength="100"
+          required
+          placeholder="Email address"
+          [id]="fieldNamePersonEmailAddress"
+          formControlName="{{ fieldNamePersonEmailAddress }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNamePersonId">Id</label>
+        {{ theModel.id }}
+        <input
+          type="text"
+          class="form-control"
+          aria-label="readonly"
+          readonly
+          [id]="fieldNamePersonId"
+          formControlName="{{ fieldNamePersonId }}"
+        />
+      </div>
+      <app-lookup-dropdown-control
+        labelText="Status"
+        lookupTypeName="System.Lookup.StatusValues"
+        #personStatus
+        formControlName="personStatus"
+      ></app-lookup-dropdown-control>
+
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNamePersonCreatedBy"
+          >Created By</label
+        >
+        {{ theModel.createdBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNamePersonCreatedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNamePersonCreatedDate"
+          >Created Date</label
+        >
+        {{ theModel.createdDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNamePersonCreatedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNamePersonLastModifiedBy"
+          >Last Modified By</label
+        >
+        {{ theModel.lastModifiedBy }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNamePersonLastModifiedBy }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNamePersonLastModifiedDate"
+          >Last Modified Date</label
+        >
+        {{ theModel.lastModifiedDate }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNamePersonLastModifiedDate }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" [for]="fieldNamePersonTimestamp"
+          >Timestamp</label
+        >
+        {{ theModel.timestamp }}
+        <input
+          type="hidden"
+          class="form-control"
+          formControlName="{{ fieldNamePersonTimestamp }}"
+        />
+      </div>
+
+      <div class="btn-toolbar">
+        <button
+          type="submit"
+          class="btn btn-primary mx-2"
+          [disabled]="!theForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger mx-2" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
